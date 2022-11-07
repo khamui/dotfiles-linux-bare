@@ -37,6 +37,7 @@ alias weather='curl v2.wttr.in'
 alias upconfig='cp -R ~/Documents/Development/devconfigs/{.vim,.gitconfig,.zshenv,.zshrc,.zshrceval} ~/'
 alias puconfig='cp -rf ~/{.vim,.gitconfig,.zshenv,.zshrc,.zshrceval} ~/Documents/Development/devconfigs/'
 alias pip=pip3
+alias makepy='make clean && /usr/local/bin/python -m venv venv && make install && make watch'
 
 # tmux aliases
 alias :q='exit'
