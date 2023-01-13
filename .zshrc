@@ -1,7 +1,3 @@
-# set pythonpath explicitly
-PYTHONPATH="/usr/local/bin/python"
-export PYTHONPATH
-
 # Updated 8.10.22 (manually, curl)
 eval "$(starship init zsh)"
 
@@ -54,6 +50,9 @@ alias docrun='docker-compose run app sh -c '
 
 # dotfiles-bare alias
 alias dot='/usr/bin/git --git-dir=$HOME/Documents/Development/dotfiles-bare/ --work-tree=$HOME'
+
+# python3 alias
+alias python='/opt/homebrew/bin/python3'
 
 # fzf searcher
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
