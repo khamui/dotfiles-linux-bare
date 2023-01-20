@@ -4,6 +4,21 @@ eval "$(starship init zsh)"
 # zoxide
 eval "$(zoxide init zsh)"
 
+# functions
+set_python_runtime() {
+    if [ "$1" = "for_venv" ]; then
+        echo "$1"
+        alias python='venv/bin/python3'
+        echo 'set python to venv.'
+    elif [ "$1" = "for_home" ]; then
+        echo "$1"
+        alias python='/opt/homebrew/bin/python3'
+        echo 'set python to home.'
+    else
+        echo '1 argument missing'
+    fi
+}
+
 # navigation aliases
 alias v='nvim'
 alias ..='cd ..'
@@ -18,7 +33,8 @@ alias fas='cd ~/Documents/Development/JavaScript/github-repos/forest-app; ng ser
 alias rpg='cd ~/Documents/Development/JavaScript/react-pground'
 alias lqssh='ssh -i id_ed25519 kha@conway-ssh.liqd.net'
 alias lq='cd ~/Documents/Development/LIQD'
-alias venv='source venv/bin/activate'
+alias venv='source venv/bin/activate && set_python_runtime for_venv'
+alias dvenv='deactivate && set_python_runtime for_home'
 
 # command aliases
 alias ls='ls -alrt -G'
@@ -52,7 +68,7 @@ alias docrun='docker-compose run app sh -c '
 alias dot='/usr/bin/git --git-dir=$HOME/Documents/Development/dotfiles-bare/ --work-tree=$HOME'
 
 # python3 alias
-alias python='/opt/homebrew/bin/python3'
+set_python_runtime
 
 # fzf searcher
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

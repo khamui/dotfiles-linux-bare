@@ -1,5 +1,5 @@
 local g = vim.g
-local map = vim.api.nvim_set_keymap
+local map = vim.keymap.set
 
 -- leader
 g.mapleader = ";"
@@ -8,31 +8,31 @@ g.mapleader = ";"
 map('n', 'v', '<C-v>', {}) -- entering Visual Block
 
 -- general navigation
-map('i', 'jk', '<ESC>', {noremap = true})
-map('v', '<Tab>', '<ESC>', {noremap = true})
-map('n', 'H', '0', {noremap = true})
-map('v', 'H', '0', {noremap = true})
-map('n', 'L', 'A<ESC>', {noremap = true})
-map('v', 'L', '$', {noremap = true})
-map('n', 'vv', '0v$', {noremap = true})
-map('n', '<C-A>', 'gg0vG$', {noremap = true})
+map('i', 'jk', '<ESC>')
+map('v', '<Tab>', '<ESC>')
+map('n', 'H', '0')
+map('v', 'H', '0')
+map('n', 'L', 'A<ESC>')
+map('v', 'L', '$')
+map('n', 'vv', '0v$')
+map('n', '<C-A>', 'gg0vG$')
 
 -- split navigation
-map('n', '¬', ':vsp<CR>', {noremap = true})
-map('n', '∆', ':sp<CR>', {noremap = true})
-map('n', '<C-L>', '<C-W><C-L>', {noremap = true})
-map('n', '<C-H>', '<C-W><C-H>', {noremap = true})
-map('n', '<C-J>', '<C-W><C-J>', {noremap = true})
-map('n', '<C-K>', '<C-W><C-K>', {noremap = true})
+map('n', '¬', ':vsp<CR>')
+map('n', '∆', ':sp<CR>')
+map('n', '<C-L>', '<C-W><C-L>')
+map('n', '<C-H>', '<C-W><C-H>')
+map('n', '<C-J>', '<C-W><C-J>')
+map('n', '<C-K>', '<C-W><C-K>')
 
 -- inserting
-map('n', '<C-s>', ':call ShojiToggle()<CR>', {noremap = true})
-map('n', '-', 'ddp', {noremap = true})
-map('n', '_', 'ddkP', {noremap = true})
-map('n', '<leader>"', 'viw<ESC>a"<ESC>bi"<ESC>lel', {noremap = true})
-map('n', '<leader>\'', 'viw<ESC>a\'<ESC>bi\'<ESC>lel', {noremap = true})
-map('n', '<leader>o', 'o<ESC>', {noremap = true})
-map('n', '<leader>O', 'O<ESC>', {noremap = true})
+map('n', '<C-s>', ':call ShojiToggle()<CR>')
+map('n', '-', 'ddp')
+map('n', '_', 'ddkP')
+map('n', '<leader>"', 'viw<ESC>a"<ESC>bi"<ESC>lel')
+map('n', '<leader>\'', 'viw<ESC>a\'<ESC>bi\'<ESC>lel')
+map('n', '<leader>o', 'o<ESC>')
+map('n', '<leader>O', 'O<ESC>')
 -- map('n', '<leader>p', ':lua require("funcs").copy_to_next_empty_line("down")<CR>', {noremap = true })
 -- map('n', '<leader>P', ':lua require("funcs").copy_to_next_empty_line("up")<CR>', {noremap = true })
 -- map('n', '<leader>j', ':lua require("funcs").go_to_next_empty_line("down")<CR>', {noremap = true })
@@ -40,8 +40,8 @@ map('n', '<leader>O', 'O<ESC>', {noremap = true})
 -- map('n', '<leader>p', ':lua require("funcs").is_function_def()<CR>', {noremap = true })
 
 -- split resize
-map('n', '<leader>+', ':vertical resize +5<CR>', {noremap = true})
-map('n', '<leader>-', ':vertical resize -5<CR>', {noremap = true})
+map('n', '<leader>+', ':vertical resize +5<CR>')
+map('n', '<leader>-', ':vertical resize -5<CR>')
 
 -- copilot overwrite
 vim.cmd [[
@@ -50,37 +50,37 @@ let g:copilot_no_tab_map = v:true
 ]]
 
 -- ale lint
-map('n', '<leader>aj', ':ALENext<CR>', {noremap = true})
-map('n', '<leader>ak', ':ALEPrevious<CR>', {noremap = true})
+map('n', '<leader>aj', ':ALENext<CR>')
+map('n', '<leader>ak', ':ALEPrevious<CR>')
 
+map('n', '<leader>ff', function() return require("telescope.builtin").find_files() end)
 -- telescope
-map('n', '<leader>ff', ':lua require("telescope.builtin").find_files()<CR>', { noremap = true })
-map('n', '<leader>fg', ':lua require("telescope.builtin").live_grep()<CR>', { noremap = true })
-map('n', '<leader>fb', ':lua require("telescope.builtin").buffers()<CR>', { noremap = true })
-map('n', '<leader>fh', ':lua require("telescope.builtin").help_tags()<CR>', { noremap = true })
-map('n', '<leader>fz', ':lua require("telescope").extensions.zoxide.list()<CR>', { noremap = true })
-map('n', '<leader>p', ':lua require("telescope").extensions.neoclip.default()<CR>', { noremap = true })
-map('n', '<leader>P', ':Telescope neoclip star<CR>', { noremap = true })
+map('n', '<leader>fg', function() return require("telescope.builtin").live_grep() end)
+map('n', '<C-p>', function() return require("telescope.builtin").git_files() end)
+map('n', '<leader>fh', function() return require("telescope.builtin").help_tags() end)
+map('n', '<leader>fb', function() return require("telescope.builtin").buffers() end)
+map('n', '<leader>fz', function() return require("telescope").extensions.zoxide.list() end)
+map('n', '<leader>p', function() return require("telescope").extensions.neoclip.default() end)
+map('n', '<leader>P', ':Telescope neoclip star<CR>')
 
 -- lsp
 -- these keymappings are wrapped in a function because it is set conditionally.
 M = {}
 function M.lsp_keymaps(bufnr)
-  local bufmap = vim.api.nvim_buf_set_keymap
-  local opts = { noremap = true, silent = true }
-  bufmap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  bufmap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  bufmap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  bufmap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+  local opts = {silent = true}
+  map(bufnr, "n", "gD", function() vim.lsp.buf.declaration() end, opts)
+  map(bufnr, "n", "gd", function() vim.lsp.buf.definition() end, opts)
+  map(bufnr, "n", "K", function() vim.lsp.buf.hover() end, opts)
+  map(bufnr, "n", "gi", function() vim.lsp.buf.implementation() end, opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-  bufmap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+  map(bufnr, "n", "gr", function() vim.lsp.buf.references()end, opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-  bufmap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
-  bufmap(bufnr, "n", "gl", '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-  bufmap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
-  bufmap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+  map(bufnr, "n", "[d", function() vim.diagnostic.goto_prev({ border = "rounded" }) end, opts)
+  map(bufnr, "n", "gl", function() vim.diagnostic.open_float() end, opts)
+  map(bufnr, "n", "]d", function() vim.diagnostic.goto_next({ border = "rounded" }) end, opts)
+  map(bufnr, "n", "<leader>q", function() vim.diagnostic.setloclist() end, opts)
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 end
 return M
