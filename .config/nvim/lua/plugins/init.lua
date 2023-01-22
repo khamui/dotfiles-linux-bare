@@ -12,7 +12,7 @@ require('packer').startup(function(use)
   -- Plug 'nvim-treesitter/playground'
 
   -- language servers
-  use { -- LSP Configuration & Plugins
+  use {
     'neovim/nvim-lspconfig',
     requires = {
       -- Automatically install LSPs to stdpath for neovim
@@ -38,11 +38,6 @@ require('packer').startup(function(use)
 
   -- fuzzy finder algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
-
-  -- Plug 'chemzqm/vim-jsx-improve'
-
-  -- Plug('nvim-lua/plenary.nvim')
-  -- Plug('nvim-telescope/telescope.nvim', { ['tag'] = '0.1.0' })
 
   -- colorscheme
   use "savq/melange-nvim"

@@ -26,10 +26,10 @@ cmp.setup({
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
       elseif luasnip.expandable() then
         luasnip.expand({})
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
       elseif check_backspace() then
         fallback()
       else
@@ -46,24 +46,23 @@ cmp.setup({
       end
     end, { 'i', 's', }),
   },
-  sources = {
-    { name = "nvim_lsp" },
-    { name = "luasnip" },
-    { name = "buffer" },
-    { name = "path" },
-  },
   formatting = {
     fields = { "abbr", "kind", "menu" },
     format = function(entry, vim_item)
-      local kind = vim_item.kind or 'n/a'
       vim_item.menu = ({
-        luasnip = "",
-        buffer = "",
-        nvim_lsp = "",
-        path = "",
+        luasnip = "🛠️",
+        buffer = "📦",
+        nvim_lsp = "🔮",
+        path = "🥾",
       })[entry.source.name]
       return vim_item
     end,
+  },
+  sources = {
+    { name = "luasnip" },
+    { name = "buffer" },
+    { name = "path" },
+    { name = "nvim_lsp" },
   },
   window = {
     documentation = {
@@ -75,5 +74,3 @@ cmp.setup({
     native_menu = false,
   }
 })
-
-
