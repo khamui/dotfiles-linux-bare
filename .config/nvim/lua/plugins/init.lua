@@ -1,52 +1,75 @@
-local Plug = vim.fn['plug#']
+require('packer').startup(function(use)
+  -- package manager
+  use 'wbthomason/packer.nvim'
 
-vim.call('plug#begin', '~/.config/nvim/plugged')
+  -- code parser
+  use { -- Highlight, edit, and navigate code
+    'nvim-treesitter/nvim-treesitter',
+    run = function()
+      pcall(require('nvim-treesitter.install').update { with_sync = true })
+    end,
+  }
+  -- Plug 'nvim-treesitter/playground'
 
--- parser
-Plug('nvim-treesitter/nvim-treesitter', {['do'] = ':TSUpdate'})
-Plug 'nvim-treesitter/playground'
+  -- language servers
+  use { -- LSP Configuration & Plugins
+    'neovim/nvim-lspconfig',
+    requires = {
+      -- Automatically install LSPs to stdpath for neovim
+      'williamboman/mason.nvim',
+      'williamboman/mason-lspconfig.nvim',
 
--- code completion & lsp
--- Plug 'github/copilot.vim'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'saadparwaiz1/cmp_luasnip'
+      -- Useful status updates for LSP
+      -- 'j-hui/fidget.nvim',
 
-Plug 'L3MON4D3/LuaSnip'
-Plug 'rafamadriz/friendly-snippets'
+      -- Additional lua configuration, makes nvim stuff amazing
+      -- 'folke/neodev.nvim',
+    },
+  }
 
-Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/nvim-lsp-installer'
+  -- code completion
+  use {
+    'hrsh7th/nvim-cmp',
+    requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+  }
 
-Plug 'dense-analysis/ale'
+  -- fuzzy Finder (files, lsp, etc)
+  use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
 
-Plug 'chemzqm/vim-jsx-improve'
+  -- fuzzy finder algorithm which requires local dependencies to be built. Only load if `make` is available
+  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
 
-Plug('nvim-lua/plenary.nvim')
-Plug('nvim-telescope/telescope.nvim', { ['tag'] = '0.1.0' })
+  -- Plug 'chemzqm/vim-jsx-improve'
 
--- appearance
-Plug('sonph/onehalf', {['rtp'] = 'vim/'})
+  -- Plug('nvim-lua/plenary.nvim')
+  -- Plug('nvim-telescope/telescope.nvim', { ['tag'] = '0.1.0' })
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+  -- colorscheme
+  use "savq/melange-nvim"
 
--- navigation
-Plug 'christoomey/vim-tmux-navigator'
+  -- status line
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+  }
 
--- zoxide (telescope extension)
-Plug 'nvim-lua/popup.nvim'
-Plug 'jvgrootveld/telescope-zoxide'
+  -- navigation
+  use 'christoomey/vim-tmux-navigator'
 
--- neoclip (telescope extension)
-Plug 'AckslD/nvim-neoclip.lua'
+  -- zoxide (telescope extension)
+  use 'nvim-lua/popup.nvim'
+  use 'jvgrootveld/telescope-zoxide'
 
-vim.call ('plug#end')
+  -- neoclip (telescope extension)
+  use 'AckslD/nvim-neoclip.lua'
 
-require('plugins.config-luasnip')
-require('plugins.config-cmp')
-require('plugins.config-treesitter')
-require('plugins.config-telescope')
+  -- git integration
+  use 'lewis6991/gitsigns.nvim'
+end)
+
+require('plugins.configs.config-cmp')
+require('plugins.configs.config-gitsigns')
+require('plugins.configs.config-lsp')
+require('plugins.configs.config-statusline')
+require('plugins.configs.config-telescope')
+require('plugins.configs.config-treesitter')
