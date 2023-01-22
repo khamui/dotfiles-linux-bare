@@ -1,15 +1,24 @@
-local status_ok, configs = pcall('nvim-treesitter.configs')
-if not status_ok then
-  return
-end
-
-configs.setup {
+require('nvim-treesitter.configs').setup {
+  ensure_installed = {
+    'lua',
+    'python',
+    'javascript',
+    'typescript',
+    'help',
+    'vim',
+    'html',
+    'css'
+  },
+  highlight = { enable = true },
+  indent = {
+    enable = true
+  },
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = 'gnn',
-      node_incremental = 'grn',
-      scope_incremental = 'grc',
+      init_selection = '<leader><space>',
+      node_incremental = '<leader><space>',
+      scope_inmremental = 'grc',
       node_decremental = 'grm',
     },
   },
@@ -36,9 +45,4 @@ configs.setup {
     use_virtual_text = true,
     lint_events = { 'BufWrite', 'CursorHold' }
   },
-  highlight = { enable = false },
-  indent = {
-    enable = true,
-    disable = {}
-  }
 }
