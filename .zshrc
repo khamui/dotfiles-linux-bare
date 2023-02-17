@@ -7,15 +7,11 @@ eval "$(zoxide init zsh)"
 # functions
 set_python_runtime() {
     if [ "$1" = "for_venv" ]; then
-        echo "$1"
         alias python='venv/bin/python3'
-        echo 'set python to venv.'
-    elif [ "$1" = "for_home" ]; then
-        echo "$1"
-        alias python='/opt/homebrew/bin/python3'
-        echo 'set python to home.'
+        echo 'On '"$(python --version)"' (local)'
     else
-        echo '1 argument missing'
+        alias python='/opt/homebrew/bin/python3'
+        echo 'On '"$(python --version)"' (global)'
     fi
 }
 
@@ -34,7 +30,7 @@ alias rpg='cd ~/Documents/Development/JavaScript/react-pground'
 alias lqssh='ssh -i id_ed25519 kha@conway-ssh.liqd.net'
 alias lq='cd ~/Documents/Development/LIQD'
 alias venv='source venv/bin/activate && set_python_runtime for_venv'
-alias dvenv='deactivate && set_python_runtime for_home'
+alias dvenv='deactivate && set_python_runtime'
 
 # command aliases
 alias ls='ls -alrt -G'
@@ -78,4 +74,5 @@ path+='/usr/local/bin/flake8'
 path+='/usr/local/bin'
 export PATH="/Users/khamui:$PATH"
 
-
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
