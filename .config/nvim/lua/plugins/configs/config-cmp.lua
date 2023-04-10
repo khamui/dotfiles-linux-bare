@@ -4,7 +4,7 @@ if not cmp_status_ok then
 end
 
 local luasnip = require('plugins.configs.config-cmp-luasnip')
-require("luasnip/loaders/from_vscode").lazy_load()
+require("luasnip.loaders.from_vscode").lazy_load()
 
 local check_backspace = function()
   local col = vim.fn.col "." - 1
@@ -54,6 +54,7 @@ cmp.setup({
         buffer = "📦",
         nvim_lsp = "🔮",
         path = "🥾",
+        calc = "➗",
       })[entry.source.name]
       return vim_item
     end,
@@ -61,8 +62,9 @@ cmp.setup({
   sources = {
     { name = "luasnip" },
     { name = "buffer" },
-    { name = "path" },
     { name = "nvim_lsp" },
+    { name = "path" },
+    { name = "calc" },
   },
   window = {
     documentation = {

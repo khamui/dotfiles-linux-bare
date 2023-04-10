@@ -69,7 +69,7 @@ local servers = {
     }
   },
 
-  sumneko_lua = {
+  lua_ls = {
     Lua = {
       runtime = { version = 'LuaJIT' },
       telemetry = { enable = false },
