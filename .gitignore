@@ -3,6 +3,7 @@
 !/.gitignore
 !.zshrc
 !.tmux.conf
+!iterm2_profiles
 
 # un-ignore subfolder
 !/.config/

@@ -10,7 +10,8 @@ set_python_runtime() {
         alias python='venv/bin/python3'
         echo 'On '"$(python --version)"' (local)'
     else
-        alias python='/opt/homebrew/bin/python3.10'
+        pydir=$(brew --prefix python)
+        alias python="$pydir/bin/python3"
         echo 'On '"$(python --version)"' (global)'
     fi
 }

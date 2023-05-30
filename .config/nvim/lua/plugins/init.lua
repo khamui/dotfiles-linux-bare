@@ -9,6 +9,8 @@ require('packer').startup(function(use)
       pcall(require('nvim-treesitter.install').update { with_sync = true })
     end,
   }
+
+  use({ "elgiano/nvim-treesitter-angular", branch = "topic/jsx-fix" })
   -- Plug 'nvim-treesitter/playground'
 
   -- language servers
