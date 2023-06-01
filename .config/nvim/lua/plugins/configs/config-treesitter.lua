@@ -8,7 +8,8 @@ require('nvim-treesitter.configs').setup {
     'help',
     'vim',
     'html',
-    'css'
+    'css',
+    'markdown'
   },
   highlight = { enable = true },
   indent = {
