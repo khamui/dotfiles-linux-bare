@@ -62,7 +62,7 @@ alias lqbuild='ssh build@build.liqd.net build '
 alias docrun='docker-compose run app sh -c '
 
 # dotfiles-bare alias
-alias dot='/usr/bin/git --git-dir=$HOME/Documents/Development/dotfiles-bare/ --work-tree=$HOME'
+alias dot='/usr/bin/git --git-dir=$HOME/Repos/dotfiles-bare.git/ --work-tree=$HOME'
 
 # python3 alias
 set_python_runtime
