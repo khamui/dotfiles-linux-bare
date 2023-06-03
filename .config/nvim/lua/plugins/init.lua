@@ -49,7 +49,14 @@ require('packer').startup(function(use)
     branch = "main",
     event = "LspAttach",
     config = function()
-        require("lspsaga").setup({})
+        require("lspsaga").setup({
+          finder = {
+            keys = {
+              vsplit = "¬",
+              split = "∆"
+            }
+          }
+        })
     end,
     requires = {
         {"nvim-tree/nvim-web-devicons"},
