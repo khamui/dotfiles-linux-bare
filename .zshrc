@@ -77,3 +77,7 @@ export PATH="/Users/khamui:$PATH"
 
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
+
+
+# Load Angular CLI autocompletion.
+# source <(ng completion script)

@@ -28,6 +28,7 @@ map('n', '-', 'ddp')
 map('n', '_', 'ddkP')
 map('n', '<leader>o', 'o<ESC>')
 map('n', '<leader>O', 'O<ESC>')
+map('n', '<leader>w', ':FormatWrite<CR>')
 
 ----------------------------------
 ------------ SPLIT ---------------
@@ -122,7 +123,11 @@ map("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
 map("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>")
 
 -- Toggle outline
-map("n","<C-t>", "<cmd>Lspsaga outline<CR>")
+map("n","<leader><C-t>", "<cmd>Lspsaga outline<CR>")
+
+-- Toggle nvim-tree
+map("n", "<C-t>", "<cmd>NvimTreeToggle<CR>")
+map("n", "<leader><C-f>", "<cmd>NvimTreeFindFile<CR>")
 
 -- Hover Doc
 -- If you want to keep the hover window in the top right hand corner,

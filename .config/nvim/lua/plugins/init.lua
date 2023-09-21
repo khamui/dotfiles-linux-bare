@@ -45,9 +45,7 @@ require('packer').startup(function(use)
   -- enhance language servers
   use({
     "glepnir/lspsaga.nvim",
-    opt = true,
-    branch = "main",
-    event = "LspAttach",
+    after = "nvim-lspconfig",
     config = function()
         require("lspsaga").setup({
           finder = {
@@ -64,6 +62,9 @@ require('packer').startup(function(use)
         {"nvim-treesitter/nvim-treesitter"}
     }
 })
+
+  -- formatting
+  use { 'mhartington/formatter.nvim' }
 
   -- code completion
   use { 'L3MON4D3/LuaSnip' }
@@ -106,6 +107,12 @@ require('packer').startup(function(use)
   -- git integration
   use 'lewis6991/gitsigns.nvim'
 
+  -- tree explorer
+  use {
+    'nvim-tree/nvim-tree.lua',
+    requires = { 'nvim-tree/nvim-web-devicons' }
+  }
+
   if packer_bootstrap then
     require('packer').sync()
   end
@@ -117,3 +124,5 @@ require('plugins.configs.config-lsp')
 require('plugins.configs.config-statusline')
 require('plugins.configs.config-telescope')
 require('plugins.configs.config-treesitter')
+require('plugins.configs.config-formatter-prettier')
+require('plugins.configs.config-nvim-tree')
