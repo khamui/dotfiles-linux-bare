@@ -10,8 +10,7 @@ set_python_runtime() {
         alias python='venv/bin/python3'
         echo 'On '"$(python --version)"' (local)'
     else
-        pydir=$(brew --prefix python)
-        alias python="$pydir/bin/python3"
+        alias python="/bin/python3"
         echo 'On '"$(python --version)"' (global)'
     fi
 }
@@ -32,7 +31,7 @@ alias a='git add .'
 alias co='git checkout '
 alias po='git pull origin $(git rev-parse --abbrev-ref HEAD)'
 alias hist='git log --oneline --graph --decorate --all'
-alias zshreload='source ~/.zshrc'
+alias soz='source ~/.zshrc'
 alias pip=pip3
 alias makepy='make clean && /usr/local/bin/python -m venv venv && make install && make watch'
 
@@ -56,9 +55,6 @@ set_python_runtime
 #[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 #bindkey '^[[A' fzf-history-widget
 
-#export NVM_DIR=~/.nvm
-#source $(brew --prefix nvm)/nvm.sh
-
-
-# Load Angular CLI autocompletion.
-# source <(ng completion script)
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
