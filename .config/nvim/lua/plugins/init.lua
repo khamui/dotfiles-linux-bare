@@ -50,14 +50,14 @@ require('packer').startup(function(use)
         require("lspsaga").setup({
           finder = {
             keys = {
-              vsplit = "¬",
-              split = "∆"
+              vsplit = "<M-l>",
+              split = "<M-j>"
             }
           }
         })
     end,
     requires = {
-        {"nvim-tree/nvim-web-devicons"},
+        --{"nvim-tree/nvim-web-devicons"},
         --Please make sure you install markdown and markdown_inline parser
         {"nvim-treesitter/nvim-treesitter"}
     }
@@ -91,7 +91,7 @@ require('packer').startup(function(use)
   -- status line
   use {
     'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    --requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
 
   -- navigation
@@ -110,7 +110,7 @@ require('packer').startup(function(use)
   -- tree explorer
   use {
     'nvim-tree/nvim-tree.lua',
-    requires = { 'nvim-tree/nvim-web-devicons' }
+    -- requires = { 'nvim-tree/nvim-web-devicons' }
   }
 
   if packer_bootstrap then
