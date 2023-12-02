@@ -52,8 +52,8 @@ alias dot='/usr/bin/git --git-dir=$HOME/Repos/dotfiles-bare/ --work-tree=$HOME'
 set_python_runtime
 
 # fzf searcher
-#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-#bindkey '^[[A' fzf-history-widget
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+bindkey '^[[A' fzf-history-widget
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
