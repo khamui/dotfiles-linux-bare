@@ -42,6 +42,16 @@ require('packer').startup(function(use)
     },
   }
 
+  -- copilot
+  use {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({})
+    end,
+  }
+
   -- enhance language servers
   use({
     "glepnir/lspsaga.nvim",

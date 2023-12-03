@@ -61,15 +61,15 @@ format = '[ $symbol $branch ]($style)'
 [git_status]
 style="bg:195"
 conflicted = "x"
-ahead = ">>(bg:195 red)"
-behind = "<<(bg:195 red)"
+ahead = ">> (bg:195 red)"
+behind = "<< (bg:195 red)"
 diverged = ">< (bg:195 9)"
-up_to_date = "[ok](bg:195 34)"
-untracked = "[delta](bg:195 9)"
-stashed = "[st](bg:195 208)"
-modified = "[mod](bg:195 9)"
+up_to_date = "[ok! ](bg:195 34)"
+untracked = "[new? ](bg:195 9)"
+stashed = "[stashed!! ](bg:195 208)"
+modified = "[changed! ](bg:195 9)"
 staged = '[++\($count\)](bg:195 34)'
-deleted = "[del] (bg:195 9)"
+deleted = "[del ] (bg:195 9)"
 format = '([$all_status$ahead_behind]($style))'
 
 [golang]
