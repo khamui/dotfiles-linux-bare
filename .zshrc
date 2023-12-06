@@ -15,6 +15,30 @@ set_python_runtime() {
     fi
 }
 
+git_status() {
+  if [ -d .git ]; then
+    git status
+  else
+    dot status
+  fi
+}
+
+git_add() {
+  if [ -d .git ]; then
+    git add .
+  else
+    dot add .
+  fi
+}
+
+git_checkout() {
+  if [ -d .git ]; then
+    git checkout 
+  else
+    dot checkout 
+  fi
+}
+
 # navigation aliases
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -24,11 +48,11 @@ alias dt='cd ~/Desktop'
 
 # command aliases
 alias v='nvim'
-alias ls='ls -alrt -G'
-alias s='git status'
+alias l='ls -alrt -G'
+alias s=git_status
 alias b='git branch'
-alias a='git add .'
-alias co='git checkout '
+alias a=git_add
+alias co=git_checkout
 alias po='git pull origin $(git rev-parse --abbrev-ref HEAD)'
 alias hist='git log --oneline --graph --decorate --all'
 alias soz='source ~/.zshrc'
