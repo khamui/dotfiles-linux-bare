@@ -49,6 +49,7 @@ alias dt='cd ~/Desktop'
 # command aliases
 alias v='nvim'
 alias l='ls -alrt -G'
+alias r='rm -rfv'
 alias s=git_status
 alias b='git branch'
 alias a=git_add
