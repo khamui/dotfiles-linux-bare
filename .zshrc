@@ -74,6 +74,10 @@ alias lg='lazygit'
 # work aliases
 alias wd='cd $ENV'
 
+# amapet aliases
+alias amas='lua ~/.config/kscripts/amapet_start.lua'
+alias amac='lua ~/.config/kscripts/amapet_start_clean.lua'
+
 # python3 alias
 set_python_runtime
 
