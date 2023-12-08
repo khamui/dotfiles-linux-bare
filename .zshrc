@@ -3,6 +3,9 @@ eval "$(starship init zsh)"
 
 # zoxide
 eval "$(zoxide init zsh)"
+#
+# dotfiles-bare alias
+alias dot='/usr/bin/git --git-dir=$HOME/Repos/dotfiles-bare/ --work-tree=$HOME'
 
 # functions
 set_python_runtime() {
@@ -53,6 +56,7 @@ alias r='rm -rfv'
 alias s=git_status
 alias b='git branch'
 alias a=git_add
+alias com='dot commit -m "quick commit dotfiles."'
 alias co=git_checkout
 alias po='git pull origin $(git rev-parse --abbrev-ref HEAD)'
 alias hist='git log --oneline --graph --decorate --all'
@@ -69,9 +73,6 @@ alias lg='lazygit'
 
 # work aliases
 alias wd='cd $ENV'
-
-# dotfiles-bare alias
-alias dot='/usr/bin/git --git-dir=$HOME/Repos/dotfiles-bare/ --work-tree=$HOME'
 
 # python3 alias
 set_python_runtime
