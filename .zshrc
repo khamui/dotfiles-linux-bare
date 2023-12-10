@@ -19,7 +19,7 @@ set_python_runtime() {
 }
 
 git_status() {
-  if [ -d .git ]; then
+  if [ -d .git ] || [ -d ../.git ]; then
     git status
   else
     dot status
@@ -27,7 +27,7 @@ git_status() {
 }
 
 git_add() {
-  if [ -d .git ]; then
+  if [ -d .git ] || [ -d ../.git ]; then
     git add .
   else
     dot add .
@@ -35,7 +35,7 @@ git_add() {
 }
 
 git_checkout() {
-  if [ -d .git ]; then
+  if [ -d .git ] || [ -d ../.git ]; then
     git checkout 
   else
     dot checkout 
