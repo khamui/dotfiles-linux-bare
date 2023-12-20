@@ -36,9 +36,9 @@ git_add() {
 
 git_checkout() {
   if [ -d .git ] || [ -d ../.git ]; then
-    git checkout 
+    git checkout $1
   else
-    dot checkout 
+    dot checkout $1
   fi
 }
 
