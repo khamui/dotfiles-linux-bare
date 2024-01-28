@@ -4,6 +4,7 @@
 !.zshrc
 !.tmux.conf
 !.alacritty.yml
+!.alacritty.toml
 
 # un-ignore subfolder
 !/.config/
