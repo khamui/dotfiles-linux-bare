@@ -1,6 +1,10 @@
 require('nvim-treesitter.configs').setup {
+  modules = {},
+  sync_install = false,
+  auto_install = true,
   ignore_install = { 'help' },
   ensure_installed = {
+    'angular',
     'lua',
     'python',
     'javascript',
@@ -20,7 +24,7 @@ require('nvim-treesitter.configs').setup {
     keymaps = {
       init_selection = '<leader><space>',
       node_incremental = '<leader><space>',
-      scope_inmremental = 'grc',
+      scope_incremental = 'grc',
       node_decremental = 'grm',
     },
   },
