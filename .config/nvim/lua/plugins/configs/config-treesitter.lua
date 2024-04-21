@@ -4,7 +4,6 @@ require('nvim-treesitter.configs').setup {
   auto_install = true,
   ignore_install = { 'help' },
   ensure_installed = {
-    'angular',
     'lua',
     'python',
     'javascript',
@@ -13,7 +12,8 @@ require('nvim-treesitter.configs').setup {
     'vim',
     'html',
     'css',
-    'markdown'
+    'markdown',
+    'rust'
   },
   highlight = { enable = true },
   indent = {

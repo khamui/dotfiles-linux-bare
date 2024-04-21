@@ -51,7 +51,7 @@ alias dt='cd ~/Desktop'
 
 # command aliases
 alias v='nvim'
-alias l='ls -alrt -G'
+alias ls='ls -alrt -G'
 alias r='rm -rfv'
 alias s=git_status
 alias b='git branch'
@@ -78,6 +78,9 @@ alias wd='cd $ENV'
 alias amas='lua ~/.config/kscripts/amapet_start.lua'
 alias amac='lua ~/.config/kscripts/amapet_start_clean.lua'
 
+# ripgrep
+alias rg='~/Repos/rust/third-party/ripgrep/target/release/rg'
+
 # python3 alias
 set_python_runtime
 
@@ -89,3 +92,23 @@ set_python_runtime
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# atlassian confluence
+alias constart='lua ~/.config/kscripts/confluence_start.lua'
+alias constop='lua ~/.config/kscripts/confluence_stop.lua'
+
+# java
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-17.0.9.0.9-3.fc39.x86_64
+
+# atlassian sdk
+export ATLAS_HOME=/opt/atlassian-plugin-sdk
+
+# atlassian sdk
+export MAVEN_HOME=/opt/atlassian-plugin-sdk/apache-maven-3.9.5
+
+# path
+export PATH=$JAVA_HOME/bin:$ATLAS_HOME/bin:$MAVEN_HOME/bin:$PATH
+
+# rust (custom location: usr/bin/rustrover/RustRover-{version}/bin)
+export RUST_HOME=/usr/local/bin/rustrover/RustRover-233.15026.24
+export PATH=$PATH:$RUST_HOME/bin

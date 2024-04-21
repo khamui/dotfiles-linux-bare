@@ -12,21 +12,17 @@ end
 local packer_bootstrap = ensure_packer()
 
 require('packer').startup(function(use)
-  -- package manager
+  --------------------------------
+  ------------ PACKER ------------
+  --------------------------------
   use 'wbthomason/packer.nvim'
-
-  -- code parser
-  use { -- Highlight, edit, and navigate code
-    'nvim-treesitter/nvim-treesitter',
-    run = function()
-      pcall(require('nvim-treesitter.install').update { with_sync = true })
-    end,
-  }
-
-  use({ "elgiano/nvim-treesitter-angular", branch = "topic/jsx-fix" })
-  -- Plug 'nvim-treesitter/playground'
-
-  -- language servers
+  --------------------------------
+  ------------- TMUX -------------
+  --------------------------------
+  use 'christoomey/vim-tmux-navigator'
+  --------------------------------
+  ------------- LSP --------------
+  --------------------------------
   use {
     'neovim/nvim-lspconfig',
     requires = {
@@ -41,8 +37,24 @@ require('packer').startup(function(use)
       -- 'folke/neodev.nvim',
     },
   }
-
-  -- copilot
+  --------------------------------
+  -------- CODE COMPLETION -------
+  --------------------------------
+  use {
+    'hrsh7th/nvim-cmp',
+    requires = {
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-calc',
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-nvim-lsp-signature-help',
+      'hrsh7th/cmp-vsnip',
+      'hrsh7th/vim-vsnip'
+    },
+  }
+  --------------------------------
+  ----------- COPILOT ------------
+  --------------------------------
   use {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
@@ -51,77 +63,66 @@ require('packer').startup(function(use)
       require("copilot").setup({})
     end,
   }
-
-  -- enhance language servers
-  use({
-    "glepnir/lspsaga.nvim",
-    after = "nvim-lspconfig",
-    config = function()
-        require("lspsaga").setup({
-          finder = {
-            keys = {
-              vsplit = "<M-l>",
-              split = "<M-j>"
-            }
-          }
-        })
-    end,
-    requires = {
-        --{"nvim-tree/nvim-web-devicons"},
-        --Please make sure you install markdown and markdown_inline parser
-        {"nvim-treesitter/nvim-treesitter"}
-    }
-})
-
-  -- formatting
-  use { 'mhartington/formatter.nvim' }
-
-  -- code completion
-  use { 'L3MON4D3/LuaSnip' }
-  use {
-    'hrsh7th/nvim-cmp',
-    requires = {
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-calc',
-      'saadparwaiz1/cmp_luasnip',
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-path',
-    },
-  }
-
-  -- fuzzy Finder (files, lsp, etc)
+  --------------------------------
+  ----------- TELESCOPE ----------
+  --------------------------------
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
-
   -- fuzzy finder algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
-
+  -- zoxide (telescope extension)
+  use 'nvim-lua/popup.nvim'
+  use 'jvgrootveld/telescope-zoxide'
+  -- neoclip (telescope extension)
+  use 'AckslD/nvim-neoclip.lua'
+  --------------------------------
+  ---------- NAVIGATION ----------
+  --------------------------------
+  use {
+    'nvim-tree/nvim-tree.lua',
+    -- requires = { 'nvim-tree/nvim-web-devicons' }
+  }
+  -- lsp saga
+  use ({
+    'nvimdev/lspsaga.nvim',
+    after = 'nvim-lspconfig',
+    config = function()
+        require('lspsaga').setup({})
+    end,
+  })
+  --------------------------------
+  ----------- FORMATTER ----------
+  --------------------------------
+  use { 'mhartington/formatter.nvim' }
+  --------------------------------
+  ---------- TREESITTER ----------
+  --------------------------------
+  use { -- Highlight, edit, and navigate code
+    'nvim-treesitter/nvim-treesitter',
+    run = function()
+      pcall(require('nvim-treesitter.install').update { with_sync = true })
+    end,
+  }
+  --------------------------------
+  ----------- APPEARANCE ---------
+  --------------------------------
   -- colorscheme
   use "savq/melange-nvim"
-
   -- status line
   use {
     'nvim-lualine/lualine.nvim',
     --requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
-
-  -- navigation
-  use 'christoomey/vim-tmux-navigator'
-
-  -- zoxide (telescope extension)
-  use 'nvim-lua/popup.nvim'
-  use 'jvgrootveld/telescope-zoxide'
-
-  -- neoclip (telescope extension)
-  use 'AckslD/nvim-neoclip.lua'
-
   -- git integration
   use 'lewis6991/gitsigns.nvim'
-
-  -- tree explorer
-  use {
-    'nvim-tree/nvim-tree.lua',
-    -- requires = { 'nvim-tree/nvim-web-devicons' }
-  }
+  --------------------------------
+  ---------- RUST-TOOLS ----------
+  --------------------------------
+  use 'simrat39/rust-tools.nvim'
+  --------------------------------
+  ------------ DEBUGGER ----------
+  --------------------------------
+  use 'mfussenegger/nvim-dap'
+  use "ldelossa/nvim-dap-projects"
 
   if packer_bootstrap then
     require('packer').sync()
@@ -136,3 +137,5 @@ require('plugins.configs.config-telescope')
 require('plugins.configs.config-treesitter')
 require('plugins.configs.config-formatter-prettier')
 require('plugins.configs.config-nvim-tree')
+require('plugins.configs.config-rust-tools')
+require('plugins.configs.config-nvim-dap-projects')

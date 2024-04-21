@@ -139,3 +139,13 @@ map("n", "K", "<cmd>Lspsaga hover_doc ++keep<CR>")
 
 -- Floating terminal
 map({"n", "t"}, "∂", "<cmd>Lspsaga term_toggle<CR>")
+
+----------------------------------
+----------- NVIM DAP -----------
+----------------------------------
+map("n", "<F9>", function() require('dap').toggle_breakpoint() end)
+map('n', '<F5>', function() require('dap').continue() end)
+map('n', '<F10>', function() require('dap').step_over() end)
+map('n', '<F11>', function() require('dap').step_into() end)
+map('n', '<F12>', function() require('dap').step_out() end)
+

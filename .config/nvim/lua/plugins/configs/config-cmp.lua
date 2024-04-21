@@ -3,87 +3,54 @@ if not cmp_status_ok then
   return
 end
 
-local luasnip = require('plugins.configs.config-cmp-luasnip')
-require("luasnip.loaders.from_vscode").lazy_load()
-
-local check_backspace = function()
-  local col = vim.fn.col "." - 1
-  return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
-end
-
--- copilot-cmp
-local has_words_before = function()
-  if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
-end
-
 cmp.setup({
+  -- Enable LSP snippets
   snippet = {
     expand = function(args)
-      luasnip.lsp_expand(args.body) -- For `luasnip` users.
+        vim.fn["vsnip#anonymous"](args.body)
     end,
   },
   mapping = {
-    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    -- Add tab support
+    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+    ['<Tab>'] = cmp.mapping.select_next_item(),
+    ['<C-S-f>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
     ['<CR>'] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true
-    }),
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expandable() then
-        luasnip.expand({})
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      elseif cmp.visible() and has_words_before() then
-        cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-      elseif check_backspace() then
-        fallback()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's', }),
+      behavior = cmp.ConfirmBehavior.Insert,
+      select = true,
+    })
   },
-  formatting = {
-    fields = { "abbr", "kind", "menu" },
-    format = function(entry, vim_item)
-      vim_item.menu = ({
-        copilot = "🤖",
-        luasnip = "🛠️",
-        buffer = "📦",
-        nvim_lsp = "🔮",
-        path = "🥾",
-        calc = "➗",
-      })[entry.source.name]
-      return vim_item
-    end,
-  },
+  -- Installed sources:
   sources = {
-    { name = "copilot" },
-    { name = "luasnip" },
-    { name = "buffer" },
-    { name = "nvim_lsp" },
-    { name = "path" },
-    { name = "calc" },
+    { name = 'path' },                              -- file paths
+    { name = 'nvim_lsp', keyword_length = 3 },      -- from language server
+    { name = 'nvim_lsp_signature_help'},            -- display function signatures with current parameter emphasized
+    { name = 'nvim_lua', keyword_length = 2},       -- complete neovim's Lua runtime API such vim.lsp.*
+    { name = 'buffer', keyword_length = 2 },        -- source current buffer
+    { name = 'vsnip', keyword_length = 2 },         -- nvim-cmp source for vim-vsnip 
+    { name = 'calc'},                               -- source for math calculation
   },
   window = {
-    documentation = {
-      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-    },
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
   },
-  experimental = {
-    ghost_text = false,
-    native_menu = false,
-  }
+  formatting = {
+      fields = { "abbr", "kind", "menu" },
+      format = function(entry, vim_item)
+          vim_item.menu = ({
+              path = "🥾",
+              nvim_lsp = "🔮",
+              vsnip = "🛠️",
+              buffer = "📦",
+              calc = "➗",
+          })[entry.source.name]
+          return vim_item
+      end,
+  },
 })
+
