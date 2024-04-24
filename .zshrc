@@ -112,3 +112,6 @@ export PATH=$JAVA_HOME/bin:$ATLAS_HOME/bin:$MAVEN_HOME/bin:$PATH
 # rust (custom location: usr/bin/rustrover/RustRover-{version}/bin)
 export RUST_HOME=/usr/local/bin/rustrover/RustRover-233.15026.24
 export PATH=$PATH:$RUST_HOME/bin
+
+# codex (custom location: /opt/codex-2.0.4/Codex)
+alias codex=/opt/codex-2.0.4/Codex
