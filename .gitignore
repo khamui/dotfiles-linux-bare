@@ -9,7 +9,13 @@
 # un-ignore subfolder
 !/.config/
 /.config/*
+
 !/.config/kscripts/
+
+!/.config/codex/
+/.config/codex/*
+!/.config/codex/notes
+
 !/.config/nvim/
 /.config/nvim/*
 !/.config/nvim/init.lua
@@ -18,6 +24,7 @@
 !/.config/nvim/lua
 !/.config/nvim/ftplugin
 !/.config/starship.toml
+
 
 # Local Netlify folder
 .netlify
