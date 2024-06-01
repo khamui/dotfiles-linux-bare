@@ -29,6 +29,8 @@ map('n', '_', 'ddkP')
 map('n', '<leader>o', 'o<ESC>')
 map('n', '<leader>O', 'O<ESC>')
 map('n', '<leader>w', ':FormatWrite<CR>')
+map('n', '<leader>y', '"+y')
+map('v', '<leader>y', '"+y')
 
 ----------------------------------
 ------------ SPLIT ---------------

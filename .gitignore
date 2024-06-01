@@ -12,9 +12,9 @@
 
 !/.config/kscripts/
 
-!/.config/codex/
-/.config/codex/*
-!/.config/codex/notes
+# !/.config/codex/
+# /.config/codex/*
+# !/.config/codex/notes
 
 !/.config/nvim/
 /.config/nvim/*
