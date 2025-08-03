@@ -31,6 +31,7 @@ map('n', '<leader>O', 'O<ESC>')
 map('n', '<leader>w', ':FormatWrite<CR>')
 map('n', '<leader>y', '"+y')
 map('v', '<leader>y', '"+y')
+map('i', '<S-Tab>', '<C-d>')
 
 ----------------------------------
 ------------ SPLIT ---------------
@@ -47,10 +48,9 @@ map('n', '<leader>l', ':vertical resize -5<CR>')
 ----------------------------------
 -------------- COPILOT -----------
 ----------------------------------
-vim.cmd [[
-imap <silent><script><expr> <leader><Tab> copilot#Accept("\<CR>")
-let g:copilot_no_tab_map = v:true
-]]
+map('i', '<leader><Tab>', function()
+  require('copilot.suggestion').accept()
+end, { desc = "Copilot Accept" })
 
 ----------------------------------
 ------------ TELESCOPE -----------

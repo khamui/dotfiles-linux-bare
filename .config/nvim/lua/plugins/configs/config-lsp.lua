@@ -1,8 +1,8 @@
 local signs = {
   { name = "DiagnosticSignError", text = "⛔️" },
-  { name = "DiagnosticSignWarn", text = "⚠️ " },
+  { name = "DiagnosticSignWarn", text = "w " },
   { name = "DiagnosticSignHint", text = "💡" },
-  { name = "DiagnosticSignInfo", text = "ℹ️ " },
+  { name = "DiagnosticSignInfo", text = "i " },
 }
 
 for _, sign in ipairs(signs) do
@@ -20,8 +20,7 @@ local config = {
   signs = {
     active = signs,
   },
-  update_in_insert = true,
-  underline = true,
+  update_in_insert = true, underline = true,
   severity_sort = true,
   float = {
     focusable = false,
@@ -53,13 +52,13 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-  ts_ls = {
-    ts_ls = {
-      diagnostics = {
-        globals = {'React'}
-      }
-    }
-  },
+  --ts_ls = {
+  --  ts_ls = {
+  --    diagnostics = {
+  --      globals = {'React'}
+  --    }
+  --  }
+  --},
 
   pyright = {
     pyright = {
@@ -98,16 +97,16 @@ local mason_lspconfig = require 'mason-lspconfig'
 
 mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
-}
+  handlers = {
+	function(server_name)
+    		require('lspconfig')[server_name].setup {
+      			capabilities = capabilities,
+      			on_attach = on_attach,
+      			settings = servers[server_name],
+    		}
+  	end,
 
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    require('lspconfig')[server_name].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = servers[server_name],
-    }
-  end,
+  }
 }
 
 --

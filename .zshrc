@@ -115,3 +115,6 @@ export PATH=$PATH:$RUST_HOME/bin
 
 # codex (custom location: /opt/codex-2.0.4/Codex)
 alias codex=/opt/codex-2.0.4/Codex
+
+# rustrover 
+alias rover=/usr/local/RustRover-2024.3.1/bin/rustrover

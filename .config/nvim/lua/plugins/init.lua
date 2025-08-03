@@ -40,18 +40,18 @@ require('packer').startup(function(use)
   --------------------------------
   -------- CODE COMPLETION -------
   --------------------------------
-  use {
-    'hrsh7th/nvim-cmp',
-    requires = {
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-calc',
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-nvim-lsp-signature-help',
-      'hrsh7th/cmp-vsnip',
-      'hrsh7th/vim-vsnip'
-    },
-  }
+  --use {
+  --  'hrsh7th/nvim-cmp',
+  --  requires = {
+  --    'hrsh7th/cmp-buffer',
+  --    'hrsh7th/cmp-calc',
+  --    'hrsh7th/cmp-nvim-lsp',
+  --    'hrsh7th/cmp-path',
+  --    'hrsh7th/cmp-nvim-lsp-signature-help',
+  --    'hrsh7th/cmp-vsnip',
+  --    'hrsh7th/vim-vsnip'
+  --  },
+  --}
   --------------------------------
   ----------- COPILOT ------------
   --------------------------------
@@ -60,9 +60,13 @@ require('packer').startup(function(use)
     cmd = "Copilot",
     event = "InsertEnter",
     config = function()
-      require("copilot").setup({})
+      require("copilot").setup({
+        suggestion = { enabled = true, auto_trigger = true },
+        panel = { enabled = true },
+      })
     end,
   }
+
   --------------------------------
   ----------- TELESCOPE ----------
   --------------------------------
@@ -86,7 +90,14 @@ require('packer').startup(function(use)
     'nvimdev/lspsaga.nvim',
     after = 'nvim-lspconfig',
     config = function()
-        require('lspsaga').setup({})
+        require('lspsaga').setup({
+          signature_help = { enable = false },
+          lightbulb = { enable = false },
+          code_action = { enable = false },
+          symbol_in_winbar = {
+            enable = false,
+          }
+      })
     end,
   })
   --------------------------------
